@@ -16,4 +16,8 @@ func main() {
 
 	let := Persona{"Letterio", 42}
 	let.Presenta()
+
+	punto := struct{ x, y int }{x: 1, y: 2}
+
+	fmt.Println(punto.x, punto.y)
 }
