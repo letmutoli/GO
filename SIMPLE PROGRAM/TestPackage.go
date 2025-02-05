@@ -1,4 +1,4 @@
-//package main
+/*ackage main
 
 import (
 	"saluto"
@@ -6,4 +6,4 @@ import (
 
 func main() {
 	saluto.Saluta("Lillo")
-}
+}*/

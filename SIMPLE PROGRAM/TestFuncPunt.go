@@ -1,4 +1,4 @@
-//package main
+/*package main
 
 import "fmt"
 
@@ -11,4 +11,4 @@ func main() {
 	cambioValore(&x)
 	fmt.Println(x)
 
-}
+}*/
