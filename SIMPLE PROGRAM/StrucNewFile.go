@@ -1,4 +1,4 @@
-package main
+/*package main
 
 import "fmt"
 
@@ -28,4 +28,4 @@ func main() {
 	e := Impiegato{Persona: Persona{Nome: "Letterio", Età: 42}, Posizione: "Ingegnere"}
 
 	fmt.Println(e.Nome)
-}
+}*/
