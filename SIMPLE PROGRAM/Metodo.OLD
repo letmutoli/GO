@@ -1,4 +1,4 @@
-package main
+//package main
 
 import "fmt"
 
@@ -12,6 +12,7 @@ func (p Persona) Presenta() {
 	fmt.Printf("Ciao sono %s e ho %d anni!!\n", p.Nome, p.Età)
 }
 
+/*
 func main() {
 
 	let := Persona{"Letterio", 42}
@@ -20,4 +21,4 @@ func main() {
 	punto := struct{ x, y int }{x: 1, y: 2}
 
 	fmt.Println(punto.x, punto.y)
-}
+}*/
