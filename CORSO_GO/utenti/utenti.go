@@ -1,4 +1,4 @@
-package uetenti
+package utenti
 
 type Utente struct {
 	Nome  string
