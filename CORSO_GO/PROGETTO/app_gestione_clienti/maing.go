@@ -5,8 +5,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-
-	//"log"
 	"net/http"
 	"text/template"
 
@@ -104,6 +102,48 @@ func main() {
 
 	})
 
+	//gestore sessioni
+	http.HandleFunc("/user", func(w http.ResponseWriter, r *http.Request) {
+		cookie, err := r.Cookie("session_id")
+		if err != nil {
+			http.Error(w, "Non autenticato", http.StatusUnauthorized)
+		}
+		userID, ok := sessionMap[cookie.Value]
+
+		if !ok {
+			http.Error(w, "sessione nin valida", http.StatusUnauthorized)
+		}
+		var user User
+		switch r.Method {
+		case http.MethodGet:
+			err := db.QueryRow("SELECT id, name, email, password FROM users WHERE id = $1", userID).Scan(&user.Id, &user.Name, &user.Email, &user.Password)
+			if err != nil {
+				http.Error(w, "Utente non trovato", 404)
+				return
+			}
+
+			t, _ := template.ParseFiles("user.html")
+			t.Execute(w, user)
+
+		case http.MethodPost:
+			// prendo i dati da inserire
+			newName := r.FormValue("name")
+			newEmail := r.FormValue("email")
+			newPassword := r.FormValue("password")
+
+			//aggiorno utente mediante insert
+			_, err := db.Exec("UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4", newName, newEmail, newPassword, userID)
+			if err != nil {
+				http.Error(w, "Errore durante l'aggiornamento", 500)
+				return
+			}
+			fmt.Fprint(w, "Utente aggiornato con successo")
+
+		default:
+			http.Error(w, "Metodo non supportato", http.StatusMethodNotAllowed)
+		}
+
+	})
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello, World!")
 	})
