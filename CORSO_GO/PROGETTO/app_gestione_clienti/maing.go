@@ -7,8 +7,7 @@ import (
 	"log"
 	"net/http"
 	"text/template"
-
-	//"time"
+	"time"
 
 	"github.com/google/uuid"
 	_ "github.com/lib/pq"
@@ -142,8 +141,24 @@ func main() {
 		default:
 			http.Error(w, "Metodo non supportato", http.StatusMethodNotAllowed)
 		}
-
 	})
+
+	//logout
+	http.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
+		cookie, err := r.Cookie("session_id")
+		if err != nil {
+			http.Error(w, "Non autenticato", http.StatusUnauthorized)
+			return
+		}
+		delete(sessionMap, cookie.Value)
+		http.SetCookie(w, &http.Cookie{
+			Name:    "session_id",
+			Value:   "",
+			Expires: time.Unix(0, 0),
+		})
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+	})
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello, World!")
 	})
