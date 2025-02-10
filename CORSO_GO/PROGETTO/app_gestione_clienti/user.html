@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Utente</title>
+    </head>
+    <body>
+        <h1>Profilo Utente {{.Name}}</h1>
+        <p>ID: {{.ID}}</p>
+        <p>Email: {{.Email}}</p>
+        <form action="/user" method="post">
+            Nome: <input type="text" name="name" value="{{.Name}}" required>
+            Password:   <input type="password" name="password" required>
+          <input type="submit" value="Aggiorna">
+        </form>
+        <form action="/logout" method="post">
+          <input type="submit" value="Logout">
+        </form>
+    </body>
+</html>
