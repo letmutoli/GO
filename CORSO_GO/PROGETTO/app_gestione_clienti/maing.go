@@ -71,7 +71,7 @@ func main() {
 		//add id to session map
 		sessionMap[sessionID] = user.Id
 
-		http.Redirect(w, r, "/users", http.StatusSeeOther)
+		http.Redirect(w, r, "/user", http.StatusSeeOther)
 	})
 
 	//percordo register
@@ -121,7 +121,7 @@ func main() {
 				return
 			}
 
-			t, _ := template.ParseFiles("user.html")
+			t, _ := template.ParseFiles("/user.html")
 			t.Execute(w, user)
 
 		case http.MethodPost:
