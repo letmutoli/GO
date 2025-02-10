@@ -27,7 +27,7 @@ var sessionMap = make(map[string]int) //mappa vuota con valore stringa e chiave 
 
 func init() {
 	var err error
-	connectionString := "user=postgress password=10Lillo83 dbname=gestione_utenti sslmode=disable"
+	connectionString := "user=postgres password=10Lillo83 dbname=gestione_utenti sslmode=disable"
 	db, err = sql.Open("postgres", connectionString)
 	if err != nil {
 		panic(err)
